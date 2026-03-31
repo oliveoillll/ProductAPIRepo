@@ -1,0 +1,182 @@
+{
+  "info": {
+    "_postman_id": "a31f6f5e-196b-4d33-ae85-9a9bb739b27c",
+    "name": "productsapp-automation",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53657459"
+  },
+  "item": [
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "postman-echo.com/get",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "postman-echo.com/post",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "post"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "// General\r",
+              "pm.test(\"response to be 200 OK\", () => { pm.response.to.have.status(200) });\r",
+              "\r",
+              "// Product [0]\r",
+              "pm.test(\"value of [0].Id to be 1\", () => { pm.expect(jsonData[0].Id).to.equal(1) });\r",
+              "pm.test(\"value of [0].Name to be Tomato Soup\", () => { pm.expect(jsonData[0].Name).to.equal(\"Tomato Soup\") });\r",
+              "pm.test(\"value of [0].Category to be Groceries\", () => { pm.expect(jsonData[0].Category).to.equal(\"Groceries\") });\r",
+              "pm.test(\"value of [0].Price to be 1\", () => { pm.expect(jsonData[0].Price).to.equal(1) });\r",
+              "\r",
+              "// Product [1]\r",
+              "pm.test(\"value of [1].Id to be 2\", () => { pm.expect(jsonData[1].Id).to.equal(2) });\r",
+              "pm.test(\"value of [1].Name to be Yo-yo\", () => { pm.expect(jsonData[1].Name).to.equal(\"Yo-yo\") });\r",
+              "pm.test(\"value of [1].Category to be Toys\", () => { pm.expect(jsonData[1].Category).to.equal(\"Toys\") });\r",
+              "pm.test(\"value of [1].Price to be 3.75\", () => { pm.expect(jsonData[1].Price).to.equal(3.75) });\r",
+              "\r",
+              "// Product [2]\r",
+              "pm.test(\"value of [2].Id to be 3\", () => { pm.expect(jsonData[2].Id).to.equal(3) });\r",
+              "pm.test(\"value of [2].Name to be Hammer\", () => { pm.expect(jsonData[2].Name).to.equal(\"Hammer\") });\r",
+              "pm.test(\"value of [2].Category to be Hardware\", () => { pm.expect(jsonData[2].Category).to.equal(\"Hardware\") });\r",
+              "pm.test(\"value of [2].Price to be 16.99\", () => { pm.expect(jsonData[2].Price).to.equal(16.99) });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:44317/api/products",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "44317",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "// General\r",
+              "pm.test(\"response to be 200 OK\", () => { pm.response.to.have.status(200) });\r",
+              "\r",
+              "// Single product\r",
+              "pm.test(\"value of Id to be 1\", () => { pm.expect(jsonData.Id).to.equal(1) });\r",
+              "pm.test(\"value of Name to be Tomato Soup\", () => { pm.expect(jsonData.Name).to.equal(\"Tomato Soup\") });\r",
+              "pm.test(\"value of Category to be Groceries\", () => { pm.expect(jsonData.Category).to.equal(\"Groceries\") });\r",
+              "pm.test(\"value of Price to be 1\", () => { pm.expect(jsonData.Price).to.equal(1) });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:44317/api/products/1",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "44317",
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
