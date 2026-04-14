@@ -1,0 +1,31 @@
+$kind: http-request
+url: https://localhost:44317/api/products/1
+method: GET
+scripts:
+  - type: afterResponse
+    code: "var jsonData = pm.response.json();\r
+
+      \r
+
+      // General\r
+
+      pm.test(\"response to be 200 OK\", () => { pm.response.to.have.status(200)
+      });\r
+
+      \r
+
+      // Single product\r
+
+      pm.test(\"value of Id to be 1\", () => {
+      pm.expect(jsonData.Id).to.equal(1) });\r
+
+      pm.test(\"value of Name to be Potato Soup\", () => {
+      pm.expect(jsonData.Name).to.equal(\"Potato Soup\") });\r
+
+      pm.test(\"value of Category to be Schmoceries\", () => {
+      pm.expect(jsonData.Category).to.equal(\"Schmoceries\") });\r
+
+      pm.test(\"value of Price to be 42\", () => {
+      pm.expect(jsonData.Price).to.equal(42) });"
+    language: text/javascript
+order: 4000

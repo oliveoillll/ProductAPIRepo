@@ -1,0 +1,63 @@
+$kind: http-request
+url: https://localhost:44317/api/products
+method: GET
+scripts:
+  - type: afterResponse
+    code: "var jsonData = pm.response.json();\r
+
+      \r
+
+      // General\r
+
+      pm.test(\"response to be 200 OK\", () => { pm.response.to.have.status(200)
+      });\r
+
+      \r
+
+      // Product [0]\r
+
+      pm.test(\"value of [0].Id to be 1\", () => {
+      pm.expect(jsonData[0].Id).to.equal(1) });\r
+
+      pm.test(\"value of [0].Name to be Potato Soup\", () => {
+      pm.expect(jsonData[0].Name).to.equal(\"Potato Soup\") });\r
+
+      pm.test(\"value of [0].Category to be Schmoceries\", () => {
+      pm.expect(jsonData[0].Category).to.equal(\"Schmoceries\") });\r
+
+      pm.test(\"value of [0].Price to be 42\", () => {
+      pm.expect(jsonData[0].Price).to.equal(42) });\r
+
+      \r
+
+      // Product [1]\r
+
+      pm.test(\"value of [1].Id to be 2\", () => {
+      pm.expect(jsonData[1].Id).to.equal(2) });\r
+
+      pm.test(\"value of [1].Name to be Yo-yo\", () => {
+      pm.expect(jsonData[1].Name).to.equal(\"Yo-yo\") });\r
+
+      pm.test(\"value of [1].Category to be Toys\", () => {
+      pm.expect(jsonData[1].Category).to.equal(\"Toys\") });\r
+
+      pm.test(\"value of [1].Price to be 3.75\", () => {
+      pm.expect(jsonData[1].Price).to.equal(3.75) });\r
+
+      \r
+
+      // Product [2]\r
+
+      pm.test(\"value of [2].Id to be 3\", () => {
+      pm.expect(jsonData[2].Id).to.equal(3) });\r
+
+      pm.test(\"value of [2].Name to be Hammer\", () => {
+      pm.expect(jsonData[2].Name).to.equal(\"Hammer\") });\r
+
+      pm.test(\"value of [2].Category to be Hardware\", () => {
+      pm.expect(jsonData[2].Category).to.equal(\"Hardware\") });\r
+
+      pm.test(\"value of [2].Price to be 16.99\", () => {
+      pm.expect(jsonData[2].Price).to.equal(16.99) });"
+    language: text/javascript
+order: 3000
