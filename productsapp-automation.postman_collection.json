@@ -60,7 +60,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "raw": "{\n\t\"name\": \"oliver\"\n}",
           "options": {
             "raw": {
               "language": "json"
